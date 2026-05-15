@@ -364,6 +364,12 @@ export const TOOLS: Record<string, ToolRef> = {
     status: 'configured', source: 'industry',
     note: 'Secondary AI coding agent (cross-check / parallel implementation) for the template + orchestration code. In the stack alongside Claude Code.',
   },
+  claudeDesign: {
+    name: 'Claude Design', kind: 'agent', category: 'Methodology',
+    pricing: 'freemium', cost: 'Subscription / API usage',
+    status: 'configured', source: 'industry',
+    note: 'AI design tool used for the PRESENTATION layer — this proposal dashboard, pitch visuals and the demo/walkthrough video for the interview. Not part of the production automation pipelines; it is how the proposal itself is presented. In the stack alongside Claude Code / Codex.',
+  },
   ecc: {
     name: 'ECC Universal', kind: 'skill', category: 'Methodology',
     pricing: 'free', cost: 'Free (configured)',
