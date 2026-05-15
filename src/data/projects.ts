@@ -15,12 +15,12 @@ export const PROJECTS: Project[] = [
     goal:
       'The social media manager fills the brief and the system produces a finished or near-finished video with no manual editing.',
     pipeline: [
-      { label: 'Intake', detail: 'n8n watches the brief Doc + Drive folder; parses topic, caption, inspiration link, client area.' },
-      { label: 'Style profile', detail: 'Skill Seekers + beat/scene analysis extract pacing, cut cadence, caption style from the inspiration video.' },
-      { label: 'B-roll sourcing', detail: 'Geo + topic queries against stock + social/web; license-safe filtering; AI-gen fallback for gaps.' },
-      { label: 'Transcribe & plan', detail: 'Whisper transcribes the talking head; an LLM builds an edit decision list (EDL) against the style profile.' },
-      { label: 'Assembly', detail: 'FFmpeg / Shotstack renders: cut talking head, B-roll overlays, beat-synced music, burned captions.' },
-      { label: 'Review', detail: 'Draft + score posted to a review queue (Supabase); approve or auto-finalize.' },
+      { label: 'Intake', detail: 'n8n watches the brief Doc + Drive folder; parses topic, caption, inspiration link, client area.', agent: 'AI agent: LLM extraction (Gemini/Claude) turns the free-text brief into a schema-validated job.' },
+      { label: 'Style profile', detail: 'Skill Seekers + beat/scene analysis extract pacing, cut cadence, caption style from the inspiration video.', agent: 'AI agent: vision/beat analysis → structured style spec, embedded for later scoring.' },
+      { label: 'B-roll sourcing', detail: 'Geo + topic queries against stock + social/web; license-safe filtering; AI-gen fallback for gaps.', agent: 'AI agent: LLM ranker + RAG match scores clips vs topic/area/style; gen-video fallback on gaps.' },
+      { label: 'Transcribe & plan', detail: 'Whisper transcribes the talking head; an LLM builds an edit decision list (EDL) against the style profile.', agent: 'AI agent: LangGraph planner emits a deterministic EDL to the format template.' },
+      { label: 'Assembly', detail: 'FFmpeg / Shotstack renders: cut talking head, B-roll overlays, beat-synced music, burned captions.', agent: 'No agent — deterministic render. The agent triggers + verifies it, never freestyles it.' },
+      { label: 'Review', detail: 'Draft + score posted to a review queue (Supabase); approve or auto-finalize.', agent: 'AI agent: RAG scoring agent emits a 0–1 conformance score + template pass/fail → auto-finalize or route to human.' },
     ],
     questions: [
       {
@@ -132,12 +132,12 @@ export const PROJECTS: Project[] = [
     goal:
       'When a video is marked ready in Google Sheets, the system reads the details, opens the correct MoreLogin profile, posts to the right platform on schedule, confirms in the sheet, and flags failures.',
     pipeline: [
-      { label: 'Trigger', detail: 'n8n polls/▶ webhook on the Sheet; picks rows marked "ready to post".' },
-      { label: 'Resolve', detail: 'Map client → MoreLogin profile id; read video link, caption, platform, scheduled time.' },
-      { label: 'Schedule', detail: 'Queue the job in n8n for the exact local posting time (per-client timezone).' },
-      { label: 'Launch profile', detail: 'MoreLogin local API starts the profile (US IP + residential proxy); returns a debug port.' },
-      { label: 'Post', detail: 'Browser agent (Playwright/BrowserMCP) drives the platform upload + caption inside that profile.' },
-      { label: 'Confirm / flag', detail: 'Verify post URL → write SUCCESS + link to the Sheet; on failure, flag + alert for investigation.' },
+      { label: 'Trigger', detail: 'n8n polls/▶ webhook on the Sheet; picks rows marked "ready to post".', agent: 'No agent — deterministic Sheet trigger + idempotency key (never double-posts).' },
+      { label: 'Resolve', detail: 'Map client → MoreLogin profile id; read video link, caption, platform, scheduled time.', agent: 'AI agent: LLM normalizes/validates row fields (caption cleanup, platform/handle sanity).' },
+      { label: 'Schedule', detail: 'Queue the job in n8n for the exact local posting time (per-client timezone).', agent: 'No agent — deterministic scheduled queue with concurrency limiter.' },
+      { label: 'Launch profile', detail: 'MoreLogin local API starts the profile (US IP + residential proxy); returns a debug port.', agent: 'No agent — API call; agent only consumes the returned CDP port.' },
+      { label: 'Post', detail: 'Browser agent (Playwright/BrowserMCP) drives the platform upload + caption inside that profile.', agent: 'AI agent: browser-automation agent runs the per-platform upload flow with explicit DOM assertions + screenshot proof.' },
+      { label: 'Confirm / flag', detail: 'Verify post URL → write SUCCESS + link to the Sheet; on failure, flag + alert for investigation.', agent: 'AI agent: verifies the post is live, classifies failures into reason codes, decides retry vs flag.' },
     ],
     questions: [
       {

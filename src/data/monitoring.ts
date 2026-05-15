@@ -9,11 +9,11 @@ export const MONITORING = {
   intro:
     'A dedicated workflow-monitoring dashboard is feasible and recommended. It reads the Supabase job/post tables for operational KPIs, while Uptime Kuma watches every service heartbeat and fires alerts. Every tool below was confirmed in the research feed.',
   pipeline: [
-    { label: 'Emit', detail: 'Each n8n step + render/post worker writes status, timing, cost to Supabase; the n8n error-workflow catches any failure.' },
-    { label: 'Probe', detail: 'Uptime Kuma pings n8n, MoreLogin API, render workers, Supabase + per-pipeline heartbeat URLs.' },
-    { label: 'Observe', detail: 'RuView / Claude HUD trace the editing agent’s tool calls; CodeBurn tallies token cost per video.' },
-    { label: 'Visualize', detail: 'This Vue app gains a live ops view (queue, success/fail, latency, cost) from Supabase.' },
-    { label: 'Alert', detail: 'Uptime Kuma + n8n error-workflow push Slack/email on failed posts, stalled renders, proxy/profile down.' },
+    { label: 'Emit', detail: 'Each n8n step + render/post worker writes status, timing, cost to Supabase; the n8n error-workflow catches any failure.', agent: 'No agent — deterministic telemetry write.' },
+    { label: 'Probe', detail: 'Uptime Kuma pings n8n, MoreLogin API, render workers, Supabase + per-pipeline heartbeat URLs.', agent: 'No agent — scheduled health probes.' },
+    { label: 'Observe', detail: 'RuView / Claude HUD trace the editing agent’s tool calls; CodeBurn tallies token cost per video.', agent: 'AI agent: agent self-traces (tool calls, decisions) surfaced for audit/debug.' },
+    { label: 'Visualize', detail: 'This Vue app gains a live ops view (queue, success/fail, latency, cost) from Supabase.', agent: 'No agent — read-only KPI dashboard.' },
+    { label: 'Alert', detail: 'Uptime Kuma + n8n error-workflow push Slack/email on failed posts, stalled renders, proxy/profile down.', agent: 'AI agent: triage agent summarizes the failure + likely cause in the alert.' },
   ],
   groups: <MonitorGroup[]>[
     {

@@ -37,6 +37,7 @@ export interface QA {
 export interface PipelineStep {
   label: string
   detail: string
+  agent: string
 }
 
 export interface Project {

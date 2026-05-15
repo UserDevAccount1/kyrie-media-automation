@@ -20,6 +20,17 @@ defineProps<{ steps: PipelineStep[] }>()
             <span class="text-sm font-semibold text-slate-100">{{ s.label }}</span>
           </div>
           <p class="text-xs leading-relaxed text-slate-400">{{ s.detail }}</p>
+          <p
+            v-if="s.agent"
+            class="mt-2 rounded-md border px-2 py-1.5 text-[11px] leading-snug"
+            :class="
+              s.agent.startsWith('No agent')
+                ? 'border-edge bg-panel text-muted'
+                : 'border-accent/40 bg-accent/10 text-accent'
+            "
+          >
+            {{ s.agent }}
+          </p>
         </div>
         <div
           v-if="i < steps.length - 1"
