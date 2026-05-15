@@ -200,6 +200,12 @@ export const TOOLS: Record<string, ToolRef> = {
     status: 'recommended', source: 'industry',
     note: 'Free, clearable background music for the beat-synced track.',
   },
+  spotx: {
+    name: 'SpotX', kind: 'repo', category: 'Music',
+    pricing: 'free', cost: 'Free OSS (github.com/SpotX-Official/SpotX)',
+    status: 'recommended', source: 'industry',
+    note: 'Open-source patcher for the Spotify Windows desktop client (block ads, unlock client features). Useful as a free reference/scratch listening source to pick a track vibe — NOT a commercial license: do not embed Spotify audio in client videos (use Uppbeat/Epidemic for cleared music).',
+  },
   epidemic: {
     name: 'Epidemic Sound / Artlist', kind: 'api', category: 'Music',
     pricing: 'paid', cost: 'From ~$10–15/mo',
