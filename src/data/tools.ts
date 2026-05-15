@@ -24,6 +24,24 @@ export const TOOLS: Record<string, ToolRef> = {
     status: 'recommended', source: 'industry',
     note: 'Durable execution engine if pipelines need bullet-proof retries/state at high scale (alternative to n8n core).',
   },
+  langgraph: {
+    name: 'LangGraph', kind: 'repo', category: 'Orchestration',
+    pricing: 'free', cost: 'Free OSS (MIT) · optional paid Platform',
+    status: 'configured', source: 'industry',
+    note: 'Graph-based stateful agent orchestration — branching, loops, retries, human-in-the-loop checkpoints. Ideal for the editing decision flow (EDL → render → review) where logic is more complex than linear n8n nodes. In the stack (Agent Systems: LangChain).',
+  },
+  langchain: {
+    name: 'LangChain', kind: 'repo', category: 'Orchestration',
+    pricing: 'free', cost: 'Free OSS (MIT)',
+    status: 'configured', source: 'industry',
+    note: 'LLM tool/agent framework — chains prompts, tools, retrieval, structured output. Backs the brief-parse, B-roll-rank and caption steps; pairs with LangGraph for control flow.',
+  },
+  crewai: {
+    name: 'CrewAI', kind: 'repo', category: 'Orchestration',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'recommended', source: 'industry',
+    note: 'Role-based multi-agent framework (also in the stack) — alternative when several specialist agents (sourcing, editing, QA) collaborate on one video.',
+  },
   zapierMake: {
     name: 'Zapier / Make', kind: 'api', category: 'Orchestration',
     pricing: 'paid', cost: 'From ~$20–30/mo',

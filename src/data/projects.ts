@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
           'HeyGen MCP is available for AI avatar intro/outro hooks or as a fallback when raw footage is unusable.',
           'n8n is the conductor; the renderer is a stateless worker so we can scale to 200+/month in parallel.',
         ],
-        tools: ['ffmpeg', 'gemini', 'whisper', 'heygen', 'n8n', 'supertonic'],
+        tools: ['ffmpeg', 'gemini', 'langgraph', 'whisper', 'heygen', 'n8n', 'supertonic'],
       },
       {
         n: 3,
@@ -68,7 +68,7 @@ export const PROJECTS: Project[] = [
           'A confidence score per draft auto-finalizes high-confidence videos and routes only low-confidence ones (bad B-roll match, caption overrun, audio issues) to a 1–2 min human check.',
           'The human role shifts from "editor" to "approver" — minutes per video instead of an hour.',
         ],
-        tools: ['supabase', 'n8n', 'ecc'],
+        tools: ['supabase', 'n8n', 'langgraph', 'ecc'],
       },
       {
         n: 5,
