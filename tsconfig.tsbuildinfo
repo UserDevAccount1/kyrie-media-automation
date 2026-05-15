@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/vite-env.d.ts","./src/data/projects.ts","./src/data/tools.ts","./src/data/types.ts","./src/app.vue","./src/components/architecturediagram.vue","./src/components/projectoverview.vue","./src/components/questioncard.vue","./src/components/stackpanel.vue","./src/components/toolchip.vue"],"version":"5.9.3"}
