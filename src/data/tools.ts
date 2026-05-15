@@ -276,6 +276,18 @@ export const TOOLS: Record<string, ToolRef> = {
     status: 'recommended', source: 'industry',
     note: 'Anti-detect browser alternatives to MoreLogin, all expose a local automation API — vendor risk hedge.',
   },
+  usVps: {
+    name: 'US VPS / Cloud Region (AWS/GCP/DO us-east)', kind: 'api', category: 'Posting / Anti-detect',
+    pricing: 'freemium', cost: 'Free tier · ~$5–20/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Hosts the automation runtime (n8n, Hermes, render workers, MoreLogin orchestrator) in a US region — US-local timing + clean egress for official-API posts. NOT a substitute for per-client residential proxies on FB/IG/TikTok UI posting: datacenter IPs are easily flagged as non-residential.',
+  },
+  vpnUsIp: {
+    name: 'US VPN exit (commercial)', kind: 'api', category: 'Posting / Anti-detect',
+    pricing: 'paid', cost: '~$5–12/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Simple US exit IP for low-risk / official-API posts or testing. Honest caveat: shared datacenter VPN IPs are detection-prone and one IP across clients risks cross-account linking — residential anti-detect (MoreLogin) stays primary for social UI posting.',
+  },
   officialApis: {
     name: 'Official platform APIs', kind: 'api', category: 'Posting / Anti-detect',
     pricing: 'free', cost: 'Free (quota-limited)',

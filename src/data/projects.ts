@@ -160,8 +160,9 @@ export const PROJECTS: Project[] = [
           'MoreLogin exposes a Local API (localhost) to start/stop browser profiles. Each client is mapped once to a MoreLogin profile id (proxy + US IP already configured inside MoreLogin).',
           'The workflow calls the API to start that client\'s profile; MoreLogin returns a debug/automation port (CDP endpoint).',
           'Our Playwright/BrowserMCP driver attaches to that exact port, so all posting traffic exits through the client\'s assigned US residential proxy with the profile\'s anti-detect fingerprint — identical to how the team does it manually, just unattended.',
+          'Alternative considered — US VPS / VPN (honest assessment): a US-hosted virtual server or commercial VPN gives a US exit IP, and we DO recommend a US VPS to host the automation runtime (n8n, Hermes, render/orchestration) for US-local timing and clean official-API posts. For the actual FB/IG/TikTok UI posting it stays SECONDARY: datacenter VPS/VPN IPs are easily fingerprinted as non-residential and one shared IP across clients risks cross-account linking and bans. MoreLogin\'s per-client residential proxy + anti-detect profile remains primary — the same risk posture the team already accepts today.',
         ],
-        tools: ['moreloginApi', 'antidetectAlt', 'playwright', 'browserMcp', 'browserAgent', 'hermes'],
+        tools: ['moreloginApi', 'antidetectAlt', 'usVps', 'vpnUsIp', 'playwright', 'browserMcp', 'browserAgent', 'hermes'],
       },
       {
         n: 3,
@@ -172,7 +173,7 @@ export const PROJECTS: Project[] = [
           'Per-platform upload flows are scripted with the Browser Agent (Playwright/BrowserMCP): open composer → upload file → paste caption → set options → publish, with explicit waits and DOM assertions.',
           'YouTube optionally uses the official Data API where a client has granted it (more robust for long-form); FB/IG/TikTok stay on automated UI for fingerprint consistency. Human-like pacing + per-account daily caps reduce detection risk.',
         ],
-        tools: ['browserAgent', 'playwright', 'browserMcp', 'officialApis', 'hermes'],
+        tools: ['browserAgent', 'playwright', 'browserMcp', 'officialApis', 'usVps', 'hermes'],
       },
       {
         n: 4,
@@ -228,7 +229,7 @@ export const PROJECTS: Project[] = [
           'Account safety: conservative per-account rate limits and warm-up are essential; aggressive volume = ban risk.',
           'Dependency on MoreLogin\'s Local API staying available/stable; we add health checks and graceful pause if proxies/profiles are down.',
         ],
-        tools: ['ecc', 'moreloginApi', 'antidetectAlt', 'uptimeKuma', 'hermes', 'supabase'],
+        tools: ['ecc', 'moreloginApi', 'antidetectAlt', 'usVps', 'vpnUsIp', 'uptimeKuma', 'hermes', 'supabase'],
       },
     ],
   },
