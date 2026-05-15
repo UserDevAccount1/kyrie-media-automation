@@ -6,8 +6,9 @@ import ArchitectureDiagram from './components/ArchitectureDiagram.vue'
 import QuestionCard from './components/QuestionCard.vue'
 import StackPanel from './components/StackPanel.vue'
 import MonitoringPanel from './components/MonitoringPanel.vue'
+import HermesPanel from './components/HermesPanel.vue'
 
-type View = 'p1' | 'p2' | 'monitoring' | 'stack'
+type View = 'p1' | 'p2' | 'orchestrator' | 'monitoring' | 'stack'
 const view = ref<View>('p1')
 const openIdx = ref<number>(0)
 
@@ -33,8 +34,9 @@ function onKey(e: KeyboardEvent) {
     e.preventDefault()
   } else if (e.key === '1') selectView('p1')
   else if (e.key === '2') selectView('p2')
-  else if (e.key === '3') selectView('monitoring')
-  else if (e.key === '4') selectView('stack')
+  else if (e.key === '3') selectView('orchestrator')
+  else if (e.key === '4') selectView('monitoring')
+  else if (e.key === '5') selectView('stack')
 }
 
 onMounted(() => window.addEventListener('keydown', onKey))
@@ -43,6 +45,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 const tabs: { id: View; label: string }[] = [
   { id: 'p1', label: 'Project 1 · Video Editing' },
   { id: 'p2', label: 'Project 2 · Video Posting' },
+  { id: 'orchestrator', label: 'Orchestrator' },
   { id: 'monitoring', label: 'Monitoring' },
   { id: 'stack', label: 'Stack & Proof' },
 ]
@@ -70,7 +73,8 @@ const tabs: { id: View; label: string }[] = [
           <p>Use <kbd class="rounded border border-edge px-1">1</kbd>
             <kbd class="rounded border border-edge px-1">2</kbd>
             <kbd class="rounded border border-edge px-1">3</kbd>
-            <kbd class="rounded border border-edge px-1">4</kbd> to switch ·
+            <kbd class="rounded border border-edge px-1">4</kbd>
+            <kbd class="rounded border border-edge px-1">5</kbd> to switch ·
             <kbd class="rounded border border-edge px-1">↑</kbd>
             <kbd class="rounded border border-edge px-1">↓</kbd> to navigate Q&amp;A
           </p>
@@ -127,6 +131,7 @@ const tabs: { id: View; label: string }[] = [
         </div>
       </template>
 
+      <HermesPanel v-else-if="view === 'orchestrator'" />
       <MonitoringPanel v-else-if="view === 'monitoring'" />
       <StackPanel v-else />
     </main>

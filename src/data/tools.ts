@@ -24,6 +24,12 @@ export const TOOLS: Record<string, ToolRef> = {
     status: 'recommended', source: 'industry',
     note: 'Durable execution engine if pipelines need bullet-proof retries/state at high scale (alternative to n8n core).',
   },
+  hermes: {
+    name: 'Hermes Agent (Nous Research)', kind: 'agent', category: 'Orchestration',
+    pricing: 'free', cost: 'Free OSS (MIT, self-host, zero telemetry)',
+    status: 'configured', source: 'industry',
+    note: 'Top-level autonomous orchestrator that OWNS both pipelines once configured. Persistent memory of each client (style, brand rules, MoreLogin mapping), cron scheduling, parallel sub-agents per video/post, multi-platform command gateway (Telegram/Slack/WhatsApp/CLI) for the PH team, code+browser execution, self-writes reusable skills. Already on the automation board ("hermes workflow").',
+  },
   langgraph: {
     name: 'LangGraph', kind: 'repo', category: 'Orchestration',
     pricing: 'free', cost: 'Free OSS (MIT) · optional paid Platform',
