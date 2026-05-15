@@ -120,6 +120,18 @@ export const TOOLS: Record<string, ToolRef> = {
     status: 'recommended', source: 'news',
     note: 'Local LLM fallback for bulk, cost-free planning/caption tasks at 200+/mo scale (no per-token API spend).',
   },
+  ragAgent: {
+    name: 'RAG Scoring Agent', kind: 'agent', category: 'LLM / Reasoning',
+    pricing: 'free', cost: 'Free (custom, built on local LLM + vector DB)',
+    status: 'configured', source: 'industry',
+    note: 'Custom agent that measures style conformance: chunk + embed the inspiration video, brand rules and format template; semantic-search the rendered draft against them to emit a 0–1 score that drives auto-finalize vs human review. This is what makes the automation % an observed metric, not a guess. (RAG/embeddings already in the stack.)',
+  },
+  vectorDb: {
+    name: 'Vector DB (pgvector / Pinecone / Weaviate / Faiss)', kind: 'repo', category: 'LLM / Reasoning',
+    pricing: 'freemium', cost: 'pgvector/Faiss free · Pinecone/Weaviate free tier + paid',
+    status: 'configured', source: 'industry',
+    note: 'Stores style + brand embeddings for the scoring agent. pgvector rides on the existing Supabase Postgres (zero extra infra); Pinecone/Weaviate/Faiss are alternatives, all in the stack.',
+  },
   seedance: {
     name: 'Seedance 1.0 (ByteDance)', kind: 'api', category: 'AI video gen',
     pricing: 'paid', cost: 'Usage-based (via Kie.ai / fal / Replicate)',

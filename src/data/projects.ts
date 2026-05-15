@@ -67,9 +67,11 @@ export const PROJECTS: Project[] = [
           'Target steady state: ~85–90% fully automated, 10–15% human review. Sourcing, transcription, EDL, assembly, captioning, encoding are 100% automated.',
           'Months 1–2 (calibration): expect ~60–70% auto-approved while the style profiles and B-roll filters are tuned per client.',
           'A confidence score per draft auto-finalizes high-confidence videos and routes only low-confidence ones (bad B-roll match, caption overrun, audio issues) to a 1–2 min human check.',
+          'How that score is measured (honest mechanic): a RAG scoring agent — Ollama LLM + a vector DB (pgvector / Pinecone / Weaviate / Faiss). The inspiration video, the per-client brand rules and the agreed format template are chunked, embedded and stored. The rendered draft’s extracted features (cut cadence, caption layout, B-roll ratio, pacing) are embedded and semantic-searched against that style profile to produce a 0–1 conformance score. The predefined template adds hard pass/fail conditions (aspect ratio exact, caption safe-area, duration window, profanity/brand check).',
+          'So the automation % is an OBSERVED metric the agent emits per video — not a guess. Auto-finalize when score ≥ threshold AND all template conditions pass; otherwise route to human review. The threshold is tuned during calibration, which is why month 1–2 is ~60–70% and steady state ~85–90%.',
           'The human role shifts from "editor" to "approver" — minutes per video instead of an hour.',
         ],
-        tools: ['supabase', 'n8n', 'langgraph', 'ecc'],
+        tools: ['ragAgent', 'localLlm', 'vectorDb', 'supabase', 'n8n', 'langgraph', 'ecc'],
       },
       {
         n: 5,
