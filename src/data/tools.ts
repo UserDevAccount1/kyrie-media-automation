@@ -145,6 +145,20 @@ export const TOOLS: Record<string, ToolRef> = {
     note: 'ByteDance text/image-to-video model — strong short-form motion + cinematic camera, well-suited to real-estate B-roll. Reachable through the Kie.ai hub already listed (no separate integration).',
   },
 
+  // ---- Design / Templates -------------------------------------------------
+  huashu: {
+    name: 'Huashu-Design', kind: 'repo', category: 'Design / Templates',
+    pricing: 'free', cost: 'Free OSS (github.com/alchaincyf/huashu-design)',
+    status: 'recommended', source: 'news',
+    note: 'Generative "design-script" engine — describe brand/style intent in natural language, get back a STRUCTURED design specification the editing agent + render templates act on (caption styles, lower-thirds, thumbnails, layout). Sits upstream of the video assembly so every client format is spec-driven, not hand-tweaked.',
+  },
+  claudeDesign: {
+    name: 'Claude Design', kind: 'agent', category: 'Design / Templates',
+    pricing: 'freemium', cost: 'Subscription / API usage',
+    status: 'configured', source: 'industry',
+    note: 'AI design tool used inside the workflow to generate + iterate the per-client visual system: caption presets, lower-thirds, end-cards, thumbnail templates and the format style-guide the render engine consumes. Also produces the proposal/demo-video visuals. In the stack alongside Claude Code / Codex.',
+  },
+
   // ---- Transcription ------------------------------------------------------
   whisper: {
     name: 'Whisper / faster-whisper', kind: 'repo', category: 'Transcription',
@@ -162,9 +176,9 @@ export const TOOLS: Record<string, ToolRef> = {
   // ---- TTS / Voice --------------------------------------------------------
   supertonic: {
     name: 'Supertonic TTS', kind: 'repo', category: 'TTS / Voice',
-    pricing: 'free', cost: 'Free OSS',
+    pricing: 'free', cost: 'Free OSS (github.com/supertone-inc/supertonic)',
     status: 'recommended', source: 'news',
-    note: 'High-fidelity open-source TTS for voiceover / beat-aligned narration. Zero cost.',
+    note: 'Supertone’s high-fidelity open-source TTS. In-pipeline use: generate voiceover / narration beds and beat-aligned VO timing for the editing agent. Self-hosted, zero per-clip cost — viable at 200+/mo.',
   },
   piper: {
     name: 'Piper / Coqui TTS', kind: 'repo', category: 'TTS / Voice',
@@ -363,12 +377,6 @@ export const TOOLS: Record<string, ToolRef> = {
     pricing: 'freemium', cost: 'Subscription / API usage',
     status: 'configured', source: 'industry',
     note: 'Secondary AI coding agent (cross-check / parallel implementation) for the template + orchestration code. In the stack alongside Claude Code.',
-  },
-  claudeDesign: {
-    name: 'Claude Design', kind: 'agent', category: 'Methodology',
-    pricing: 'freemium', cost: 'Subscription / API usage',
-    status: 'configured', source: 'industry',
-    note: 'AI design tool used for the PRESENTATION layer — this proposal dashboard, pitch visuals and the demo/walkthrough video for the interview. Not part of the production automation pipelines; it is how the proposal itself is presented. In the stack alongside Claude Code / Codex.',
   },
   ecc: {
     name: 'ECC Universal', kind: 'skill', category: 'Methodology',

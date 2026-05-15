@@ -16,7 +16,7 @@ export const PROJECTS: Project[] = [
       'The social media manager fills the brief and the system produces a finished or near-finished video with no manual editing.',
     pipeline: [
       { label: 'Intake', detail: 'n8n watches the brief Doc + Drive folder; parses topic, caption, inspiration link, client area.', agent: 'AI agent: LLM extraction (Gemini/Claude) turns the free-text brief into a schema-validated job.' },
-      { label: 'Style profile', detail: 'Skill Seekers + beat/scene analysis extract pacing, cut cadence, caption style from the inspiration video.', agent: 'AI agent: vision/beat analysis → structured style spec, embedded for later scoring.' },
+      { label: 'Style profile', detail: 'Skill Seekers + beat/scene analysis extract pacing, cut cadence, caption style; Huashu-Design + Claude Design turn it into a structured visual spec/template.', agent: 'AI agent: vision/beat analysis → structured style + design spec, embedded for later scoring.' },
       { label: 'B-roll sourcing', detail: 'Geo + topic queries against stock + social/web; license-safe filtering; AI-gen fallback for gaps.', agent: 'AI agent: LLM ranker + RAG match scores clips vs topic/area/style; gen-video fallback on gaps.' },
       { label: 'Transcribe & plan', detail: 'Whisper transcribes the talking head; an LLM builds an edit decision list (EDL) against the style profile.', agent: 'AI agent: LangGraph planner emits a deterministic EDL to the format template.' },
       { label: 'Assembly', detail: 'FFmpeg / Shotstack renders: cut talking head, B-roll overlays, beat-synced music, burned captions.', agent: 'No agent — deterministic render. The agent triggers + verifies it, never freestyles it.' },
@@ -55,9 +55,10 @@ export const PROJECTS: Project[] = [
           'PARTIAL: exact color grade and transition flair — approximated with LUTs and a transition library, ~80% match.',
           'CANNOT fully replicate automatically: highly bespoke motion graphics, frame-perfect comedic timing, and creative narrative choices a senior editor would make. These are flagged for the optional human review step.',
           'Template-driven guarantee: each client/format gets a predefined style template (aspect ratio, caption preset, hook structure, B-roll ratio, LUT, transition set). A custom AI agent — scaffolded and iterated with Claude Code / Codex — generates and orchestrates every edit to that exact spec, so output reliably conforms to the agreed format instead of improvising. New formats = a new template, not a rebuild.',
+          'How the template itself is produced: Huashu-Design turns plain-language brand/style intent into a STRUCTURED design spec, and Claude Design generates + iterates the visual system from it (caption presets, lower-thirds, end-cards, thumbnails). The render engine consumes that spec — so the look is engineered and repeatable, not a per-video guess.',
           'Expectation we set honestly: "same feel and pacing", not "pixel-identical to a hand-crafted edit".',
         ],
-        tools: ['skillSeekers', 'gemini', 'claudeCode', 'codex', 'langgraph', 'whisper', 'ecc'],
+        tools: ['skillSeekers', 'huashu', 'claudeDesign', 'gemini', 'claudeCode', 'codex', 'langgraph', 'whisper', 'ecc'],
       },
       {
         n: 4,

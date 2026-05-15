@@ -7,6 +7,7 @@ export type ToolCategory =
   | 'B-roll sourcing'
   | 'Assembly / Render'
   | 'LLM / Reasoning'
+  | 'Design / Templates'
   | 'Transcription'
   | 'TTS / Voice'
   | 'AI video gen'
