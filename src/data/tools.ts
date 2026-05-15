@@ -239,6 +239,50 @@ export const TOOLS: Record<string, ToolRef> = {
     note: 'Host this dashboard / review UI with preview URLs + GitHub auto-deploy.',
   },
 
+  // ---- Monitoring ---------------------------------------------------------
+  uptimeKuma: {
+    name: 'Uptime Kuma', kind: 'repo', category: 'Monitoring',
+    pricing: 'free', cost: 'Free OSS (one-line Docker)',
+    status: 'recommended', source: 'news',
+    note: 'Self-hosted uptime dashboard (86k★ MIT). HTTP/TCP/ping/DNS + Docker-container checks, 90+ alert integrations (Slack/email/Telegram). Core of the workflow monitor — watches n8n, MoreLogin API, render workers, Supabase + heartbeats.',
+  },
+  ruview: {
+    name: 'RuView', kind: 'repo', category: 'Monitoring',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'recommended', source: 'news',
+    note: 'Observability layer for Claude-style agents — exposes live tool calls, planning steps, intermediate outputs. Audit/debug WHY the editing agent picked a B-roll clip or EDL decision.',
+  },
+  codeburn: {
+    name: 'CodeBurn', kind: 'repo', category: 'Monitoring',
+    pricing: 'free', cost: 'Free OSS (local, no API keys)',
+    status: 'recommended', source: 'news',
+    note: 'Cost observatory — token/cost/perf by task, tool, model, MCP + one-shot success rate. Tracks real per-video AI spend (feeds Project 1 cost answer).',
+  },
+  claudeHud: {
+    name: 'Claude HUD', kind: 'repo', category: 'Monitoring',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'recommended', source: 'news',
+    note: 'Real-time heads-up display for agent sessions — token usage, tool calls, context window, conversation flow at a glance during editing runs.',
+  },
+  openGenUI: {
+    name: 'OpenGenerativeUI (CopilotKit)', kind: 'repo', category: 'Monitoring',
+    pricing: 'free', cost: 'Free OSS (MIT, TypeScript)',
+    status: 'recommended', source: 'news',
+    note: 'Framework for agentic UIs that stream live dashboards/charts back from any agent runtime — optional tech to make the monitor render live agent-driven panels.',
+  },
+  n8nExec: {
+    name: 'n8n Executions + Error Workflow', kind: 'mcp', category: 'Monitoring',
+    pricing: 'free', cost: 'Free (built-in)',
+    status: 'configured', source: 'industry',
+    note: 'Native per-execution logs, retries and a global error-workflow that pushes any failed step to the monitor + alerts.',
+  },
+  customMonitor: {
+    name: 'Custom Vue monitor (this app + Supabase)', kind: 'repo', category: 'Monitoring',
+    pricing: 'free', cost: 'Free (extends this dashboard)',
+    status: 'configured', source: 'industry',
+    note: 'Operational KPI dashboard reading the Supabase job/post tables — queue depth, success/fail by client+platform, render time, per-video cost, flagged failures.',
+  },
+
   // ---- Methodology --------------------------------------------------------
   ecc: {
     name: 'ECC Universal', kind: 'skill', category: 'Methodology',

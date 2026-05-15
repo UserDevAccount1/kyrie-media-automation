@@ -5,8 +5,9 @@ import ProjectOverview from './components/ProjectOverview.vue'
 import ArchitectureDiagram from './components/ArchitectureDiagram.vue'
 import QuestionCard from './components/QuestionCard.vue'
 import StackPanel from './components/StackPanel.vue'
+import MonitoringPanel from './components/MonitoringPanel.vue'
 
-type View = 'p1' | 'p2' | 'stack'
+type View = 'p1' | 'p2' | 'monitoring' | 'stack'
 const view = ref<View>('p1')
 const openIdx = ref<number>(0)
 
@@ -32,7 +33,8 @@ function onKey(e: KeyboardEvent) {
     e.preventDefault()
   } else if (e.key === '1') selectView('p1')
   else if (e.key === '2') selectView('p2')
-  else if (e.key === '3') selectView('stack')
+  else if (e.key === '3') selectView('monitoring')
+  else if (e.key === '4') selectView('stack')
 }
 
 onMounted(() => window.addEventListener('keydown', onKey))
@@ -41,6 +43,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 const tabs: { id: View; label: string }[] = [
   { id: 'p1', label: 'Project 1 · Video Editing' },
   { id: 'p2', label: 'Project 2 · Video Posting' },
+  { id: 'monitoring', label: 'Monitoring' },
   { id: 'stack', label: 'Stack & Proof' },
 ]
 </script>
@@ -66,7 +69,8 @@ const tabs: { id: View; label: string }[] = [
         <div class="text-right text-xs text-muted no-print">
           <p>Use <kbd class="rounded border border-edge px-1">1</kbd>
             <kbd class="rounded border border-edge px-1">2</kbd>
-            <kbd class="rounded border border-edge px-1">3</kbd> to switch ·
+            <kbd class="rounded border border-edge px-1">3</kbd>
+            <kbd class="rounded border border-edge px-1">4</kbd> to switch ·
             <kbd class="rounded border border-edge px-1">↑</kbd>
             <kbd class="rounded border border-edge px-1">↓</kbd> to navigate Q&amp;A
           </p>
@@ -123,6 +127,7 @@ const tabs: { id: View; label: string }[] = [
         </div>
       </template>
 
+      <MonitoringPanel v-else-if="view === 'monitoring'" />
       <StackPanel v-else />
     </main>
 

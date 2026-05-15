@@ -12,6 +12,7 @@ export type ToolCategory =
   | 'Music'
   | 'Posting / Anti-detect'
   | 'Infra / Deploy'
+  | 'Monitoring'
   | 'Methodology'
 
 export interface ToolRef {
