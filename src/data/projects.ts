@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
           'n8n orchestrates the sourcing graph; results cached in Supabase so repeat areas/topics get instant reuse.',
           'Honest note: scraped social B-roll carries licensing/usage risk — we default to stock + AI-gen and treat scraped clips as opt-in per client.',
         ],
-        tools: ['n8n', 'playwright', 'kie', 'seedance', 'higgsfield', 'wangp', 'supabase'],
+        tools: ['n8n', 'pexels', 'storyblocks', 'apify', 'ytdlp', 'playwright', 'gemini', 'ragAgent', 'kie', 'seedance', 'higgsfield', 'wangp', 'supabase'],
       },
       {
         n: 2,
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
           'HeyGen MCP is available for AI avatar intro/outro hooks or as a fallback when raw footage is unusable.',
           'n8n is the conductor; the renderer is a stateless worker so we can scale to 200+/month in parallel.',
         ],
-        tools: ['ffmpeg', 'gemini', 'langgraph', 'whisper', 'heygen', 'n8n', 'supertonic'],
+        tools: ['ffmpeg', 'shotstack', 'remotion', 'creatomate', 'gemini', 'langgraph', 'whisper', 'heygen', 'supertonic', 'uppbeat', 'n8n'],
       },
       {
         n: 3,
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
           'So the automation % is an OBSERVED metric the agent emits per video — not a guess. Auto-finalize when score ≥ threshold AND all template conditions pass; otherwise route to human review. The threshold is tuned during calibration, which is why month 1–2 is ~60–70% and steady state ~85–90%.',
           'The human role shifts from "editor" to "approver" — minutes per video instead of an hour.',
         ],
-        tools: ['ragAgent', 'localLlm', 'vectorDb', 'supabase', 'n8n', 'langgraph', 'ecc'],
+        tools: ['ragAgent', 'localLlm', 'vectorDb', 'hermes', 'ruview', 'claudeHud', 'supabase', 'n8n', 'langgraph', 'ecc'],
       },
       {
         n: 5,
@@ -83,7 +83,7 @@ export const PROJECTS: Project[] = [
           'Blended realistic estimate at 200 videos/month: ~$1–$4 / video ≈ $200–$800 / month in tooling, excluding the one-time build.',
           'Cost drops over time as the B-roll cache and reusable style profiles reduce fresh generation/sourcing.',
         ],
-        tools: ['kie', 'wangp', 'ffmpeg', 'supabase'],
+        tools: ['codeburn', 'kie', 'seedance', 'wangp', 'localLlm', 'shotstack', 'ffmpeg', 'gemini', 'supabase'],
       },
       {
         n: 6,
@@ -93,7 +93,7 @@ export const PROJECTS: Project[] = [
           'Throughput matters more than latency: jobs run in parallel, so 200 videos/month is comfortably absorbed — effectively "ready within minutes of the brief being submitted".',
           'AI-generated B-roll adds 1–4 min when used. Optional human approval adds only the reviewer\'s 1–2 min.',
         ],
-        tools: ['n8n', 'ffmpeg'],
+        tools: ['hermes', 'n8n', 'langgraph', 'shotstack', 'ffmpeg'],
       },
       {
         n: 7,
@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
           'Week 4: review queue, confidence scoring, calibration on 10–20 real briefs; tighten to client style.',
           'Realistic: working prototype in ~3–4 weeks; production-hardened (200/mo, monitoring) in ~6–8 weeks.',
         ],
-        tools: ['superpowers', 'n8nSkills', 'github'],
+        tools: ['claudeCode', 'codex', 'hermes', 'superpowers', 'n8nSkills', 'github'],
       },
       {
         n: 8,
@@ -116,7 +116,7 @@ export const PROJECTS: Project[] = [
           'Quality variance early on: first weeks need human-in-loop while profiles calibrate.',
           'AI-gen B-roll can look synthetic for real-estate locality — used as fallback, not primary, for "real local" feel.',
         ],
-        tools: ['ecc', 'supabase'],
+        tools: ['ecc', 'hermes', 'uptimeKuma', 'wangp', 'supabase'],
       },
     ],
   },
@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
           'Each row maps to a typed job: { client, videoUrl (Drive/CDN), caption, platform, scheduledTimeLocal }. The video is pre-fetched from Drive to local/CDN so the upload step is fast and retry-safe.',
           'Jobs are written to a Supabase queue with an idempotency key (sheet row id + platform) so a row is never double-posted.',
         ],
-        tools: ['n8n', 'sheets', 'gemini', 'supabase'],
+        tools: ['n8n', 'sheets', 'gemini', 'hermes', 'supabase'],
       },
       {
         n: 2,
@@ -161,7 +161,7 @@ export const PROJECTS: Project[] = [
           'The workflow calls the API to start that client\'s profile; MoreLogin returns a debug/automation port (CDP endpoint).',
           'Our Playwright/BrowserMCP driver attaches to that exact port, so all posting traffic exits through the client\'s assigned US residential proxy with the profile\'s anti-detect fingerprint — identical to how the team does it manually, just unattended.',
         ],
-        tools: ['moreloginApi', 'playwright', 'browserMcp', 'browserAgent'],
+        tools: ['moreloginApi', 'antidetectAlt', 'playwright', 'browserMcp', 'browserAgent', 'hermes'],
       },
       {
         n: 3,
@@ -172,7 +172,7 @@ export const PROJECTS: Project[] = [
           'Per-platform upload flows are scripted with the Browser Agent (Playwright/BrowserMCP): open composer → upload file → paste caption → set options → publish, with explicit waits and DOM assertions.',
           'YouTube optionally uses the official Data API where a client has granted it (more robust for long-form); FB/IG/TikTok stay on automated UI for fingerprint consistency. Human-like pacing + per-account daily caps reduce detection risk.',
         ],
-        tools: ['browserAgent', 'playwright', 'browserMcp'],
+        tools: ['browserAgent', 'playwright', 'browserMcp', 'officialApis', 'hermes'],
       },
       {
         n: 4,
@@ -183,7 +183,7 @@ export const PROJECTS: Project[] = [
           'Where a platform offers native "schedule" in its composer (e.g. FB/YT), we can set that instead and let the platform publish — most precise, fewer live sessions.',
           'A concurrency limiter staggers many same-minute jobs so one machine isn\'t opening 10 profiles at once.',
         ],
-        tools: ['n8n', 'supabase'],
+        tools: ['n8n', 'hermes', 'supabase'],
       },
       {
         n: 5,
@@ -193,7 +193,7 @@ export const PROJECTS: Project[] = [
           'It verifies the post is live (URL reachable / appears on profile) before declaring success.',
           'n8n writes back to the Sheet row: status = POSTED, post URL, timestamp, and stores the screenshot + log in Supabase for audit. The idempotency key prevents re-posting an already-confirmed row.',
         ],
-        tools: ['n8n', 'sheets', 'supabase', 'browserAgent'],
+        tools: ['n8n', 'sheets', 'supabase', 'browserAgent', 'hermes'],
       },
       {
         n: 6,
@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
           'An alert fires (Slack/email) with the client, platform and reason so a human can step in fast. A dashboard view lists all flagged rows.',
           'Captcha / login-challenge cases are isolated so they never silently spam a platform.',
         ],
-        tools: ['n8n', 'supabase', 'ecc'],
+        tools: ['n8n', 'n8nExec', 'uptimeKuma', 'hermes', 'supabase', 'ecc'],
       },
       {
         n: 7,
@@ -215,7 +215,7 @@ export const PROJECTS: Project[] = [
           'Week 3: failure handling, retries, alerting, multi-client concurrency, hardening on real accounts.',
           'Realistic: working prototype in ~2–3 weeks; production-hardened across all clients/platforms in ~4–6 weeks.',
         ],
-        tools: ['superpowers', 'n8nSkills', 'github'],
+        tools: ['claudeCode', 'codex', 'hermes', 'superpowers', 'n8nSkills', 'github'],
       },
       {
         n: 8,
@@ -228,7 +228,7 @@ export const PROJECTS: Project[] = [
           'Account safety: conservative per-account rate limits and warm-up are essential; aggressive volume = ban risk.',
           'Dependency on MoreLogin\'s Local API staying available/stable; we add health checks and graceful pause if proxies/profiles are down.',
         ],
-        tools: ['ecc', 'moreloginApi', 'supabase'],
+        tools: ['ecc', 'moreloginApi', 'antidetectAlt', 'uptimeKuma', 'hermes', 'supabase'],
       },
     ],
   },
