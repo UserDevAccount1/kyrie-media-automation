@@ -6,6 +6,7 @@ export type ToolCategory =
   | 'Orchestration'
   | 'B-roll sourcing'
   | 'Assembly / Render'
+  | 'LLM / Reasoning'
   | 'Transcription'
   | 'TTS / Voice'
   | 'AI video gen'

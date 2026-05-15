@@ -83,6 +83,32 @@ export const TOOLS: Record<string, ToolRef> = {
     note: 'Template-based video API alternative to Shotstack; strong for caption/overlay automation.',
   },
 
+  // ---- LLM / Reasoning ----------------------------------------------------
+  gemini: {
+    name: 'Google Gemini 2.5 (+ Veo)', kind: 'api', category: 'LLM / Reasoning',
+    pricing: 'freemium', cost: 'Free tier · API usage-based',
+    status: 'configured', source: 'industry',
+    note: 'Reasoning core for both pipelines: parse brief, build the Edit Decision List, rank B-roll, write captions, reason over the inspiration style. Already in the stack (Gemini 2.5 / RAG). Veo 3 = Google’s AI video gen for generated B-roll.',
+  },
+  claudeLlm: {
+    name: 'Claude (Anthropic)', kind: 'api', category: 'LLM / Reasoning',
+    pricing: 'freemium', cost: 'API usage-based',
+    status: 'configured', source: 'industry',
+    note: 'Alternative reasoning model for EDL/planning where stronger instruction-following or long-context is needed; the agents already run on Claude.',
+  },
+  localLlm: {
+    name: 'Ollama / Qwen (local)', kind: 'repo', category: 'LLM / Reasoning',
+    pricing: 'free', cost: 'Free OSS (self-host)',
+    status: 'recommended', source: 'news',
+    note: 'Local LLM fallback for bulk, cost-free planning/caption tasks at 200+/mo scale (no per-token API spend).',
+  },
+  seedance: {
+    name: 'Seedance 1.0 (ByteDance)', kind: 'api', category: 'AI video gen',
+    pricing: 'paid', cost: 'Usage-based (via Kie.ai / fal / Replicate)',
+    status: 'recommended', source: 'industry',
+    note: 'ByteDance text/image-to-video model — strong short-form motion + cinematic camera, well-suited to real-estate B-roll. Reachable through the Kie.ai hub already listed (no separate integration).',
+  },
+
   // ---- Transcription ------------------------------------------------------
   whisper: {
     name: 'Whisper / faster-whisper', kind: 'repo', category: 'Transcription',

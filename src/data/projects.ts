@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
           'n8n orchestrates the sourcing graph; results cached in Supabase so repeat areas/topics get instant reuse.',
           'Honest note: scraped social B-roll carries licensing/usage risk — we default to stock + AI-gen and treat scraped clips as opt-in per client.',
         ],
-        tools: ['n8n', 'playwright', 'kie', 'higgsfield', 'wangp', 'supabase'],
+        tools: ['n8n', 'playwright', 'kie', 'seedance', 'higgsfield', 'wangp', 'supabase'],
       },
       {
         n: 2,
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
           'HeyGen MCP is available for AI avatar intro/outro hooks or as a fallback when raw footage is unusable.',
           'n8n is the conductor; the renderer is a stateless worker so we can scale to 200+/month in parallel.',
         ],
-        tools: ['ffmpeg', 'whisper', 'heygen', 'n8n', 'supertonic'],
+        tools: ['ffmpeg', 'gemini', 'whisper', 'heygen', 'n8n', 'supertonic'],
       },
       {
         n: 3,
@@ -56,7 +56,7 @@ export const PROJECTS: Project[] = [
           'CANNOT fully replicate automatically: highly bespoke motion graphics, frame-perfect comedic timing, and creative narrative choices a senior editor would make. These are flagged for the optional human review step.',
           'Expectation we set honestly: "same feel and pacing", not "pixel-identical to a hand-crafted edit".',
         ],
-        tools: ['skillSeekers', 'whisper', 'ecc'],
+        tools: ['skillSeekers', 'gemini', 'whisper', 'ecc'],
       },
       {
         n: 4,
@@ -146,7 +146,7 @@ export const PROJECTS: Project[] = [
           'Each row maps to a typed job: { client, videoUrl (Drive/CDN), caption, platform, scheduledTimeLocal }. The video is pre-fetched from Drive to local/CDN so the upload step is fast and retry-safe.',
           'Jobs are written to a Supabase queue with an idempotency key (sheet row id + platform) so a row is never double-posted.',
         ],
-        tools: ['n8n', 'sheets', 'supabase'],
+        tools: ['n8n', 'sheets', 'gemini', 'supabase'],
       },
       {
         n: 2,
