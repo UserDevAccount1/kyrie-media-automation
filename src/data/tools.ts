@@ -280,13 +280,13 @@ export const TOOLS: Record<string, ToolRef> = {
     name: 'US VPS / Cloud Region (AWS/GCP/DO us-east)', kind: 'api', category: 'Posting / Anti-detect',
     pricing: 'freemium', cost: 'Free tier · ~$5–20/mo',
     status: 'recommended', source: 'industry',
-    note: 'Hosts the automation runtime (n8n, Hermes, render workers, MoreLogin orchestrator) in a US region — US-local timing + clean egress for official-API posts. NOT a substitute for per-client residential proxies on FB/IG/TikTok UI posting: datacenter IPs are easily flagged as non-residential.',
+    note: 'Hosts the automation runtime (n8n, Hermes, render workers) in a US region — US-local timing + clean official-API egress. Also a valid posting path when set up properly: one isolated VPS/profile per client + a clean/residential US IP bound per client + matched fingerprint. Co-equal to MoreLogin done right; only the lazy single-shared-datacenter-IP setup is risky.',
   },
   vpnUsIp: {
     name: 'US VPN exit (commercial)', kind: 'api', category: 'Posting / Anti-detect',
     pricing: 'paid', cost: '~$5–12/mo',
     status: 'recommended', source: 'industry',
-    note: 'Simple US exit IP for low-risk / official-API posts or testing. Honest caveat: shared datacenter VPN IPs are detection-prone and one IP across clients risks cross-account linking — residential anti-detect (MoreLogin) stays primary for social UI posting.',
+    note: 'US exit IP per client. Works as a real option when set up properly — a dedicated/residential US VPN endpoint per client + matched fingerprint, not one shared datacenter exit for everyone. Done that way it is a co-equal alternative; the shared-IP shortcut is the only thing that risks linking/bans.',
   },
   officialApis: {
     name: 'Official platform APIs', kind: 'api', category: 'Posting / Anti-detect',
