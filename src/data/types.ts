@@ -1,11 +1,28 @@
 export type ToolKind = 'mcp' | 'skill' | 'agent' | 'repo' | 'api'
 export type ToolStatus = 'configured' | 'recommended'
+export type Pricing = 'free' | 'freemium' | 'paid'
+
+export type ToolCategory =
+  | 'Orchestration'
+  | 'B-roll sourcing'
+  | 'Assembly / Render'
+  | 'Transcription'
+  | 'TTS / Voice'
+  | 'AI video gen'
+  | 'Music'
+  | 'Posting / Anti-detect'
+  | 'Infra / Deploy'
+  | 'Methodology'
 
 export interface ToolRef {
   name: string
   kind: ToolKind
+  category: ToolCategory
+  pricing: Pricing
+  cost: string
   note: string
   status: ToolStatus
+  source: 'news' | 'industry'
 }
 
 export interface QA {

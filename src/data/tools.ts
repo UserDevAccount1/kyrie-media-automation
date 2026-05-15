@@ -1,133 +1,262 @@
 import type { ToolRef } from './types'
 
-// Catalog verified live against the NEURALYX environment catalog
-// (neuralyx.ai news -> "default-setup", 29 items) + news research.
+// Catalog is NOT limited to the neuralyx news feed. It mixes:
+//  - source: 'news'      -> surfaced from the neuralyx news research
+//  - source: 'industry'  -> standard battle-tested options added independently
+// Each entry is tagged free / freemium / paid so options can be filtered.
 export const TOOLS: Record<string, ToolRef> = {
+  // ---- Orchestration ------------------------------------------------------
   n8n: {
-    name: 'n8n MCP',
-    kind: 'mcp',
-    status: 'configured',
+    name: 'n8n MCP', kind: 'mcp', category: 'Orchestration',
+    pricing: 'freemium', cost: 'Free self-host · Cloud from $20/mo',
+    status: 'configured', source: 'news',
     note: 'Workflow orchestration backbone (localhost:5678). Triggers, schedules, branching, retries for both pipelines.',
   },
   n8nWorkflows: {
-    name: 'n8n-workflows MCP',
-    kind: 'mcp',
-    status: 'configured',
+    name: 'n8n-workflows MCP', kind: 'mcp', category: 'Orchestration',
+    pricing: 'free', cost: 'Free (self-host)',
+    status: 'configured', source: 'news',
     note: 'Direct workflow definition + execution over HTTP (localhost:5678/mcp-server/http).',
   },
+  temporal: {
+    name: 'Temporal', kind: 'repo', category: 'Orchestration',
+    pricing: 'freemium', cost: 'Free OSS · Cloud usage-based',
+    status: 'recommended', source: 'industry',
+    note: 'Durable execution engine if pipelines need bullet-proof retries/state at high scale (alternative to n8n core).',
+  },
+  zapierMake: {
+    name: 'Zapier / Make', kind: 'api', category: 'Orchestration',
+    pricing: 'paid', cost: 'From ~$20–30/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Hosted no-code alternative if a fully managed (no self-host) orchestration is preferred.',
+  },
+
+  // ---- B-roll sourcing ----------------------------------------------------
+  pexels: {
+    name: 'Pexels / Pixabay API', kind: 'api', category: 'B-roll sourcing',
+    pricing: 'free', cost: 'Free (attribution-free license)',
+    status: 'recommended', source: 'industry',
+    note: 'License-safe stock video/photo by geo + topic query. Default Tier-1 B-roll source.',
+  },
+  storyblocks: {
+    name: 'Storyblocks / Artgrid', kind: 'api', category: 'B-roll sourcing',
+    pricing: 'paid', cost: 'From ~$30/mo (unlimited)',
+    status: 'recommended', source: 'industry',
+    note: 'Higher-quality licensed stock for premium local B-roll where free libraries are thin.',
+  },
+  apify: {
+    name: 'Apify', kind: 'api', category: 'B-roll sourcing',
+    pricing: 'freemium', cost: 'Free $5 credit/mo · usage-based',
+    status: 'recommended', source: 'industry',
+    note: 'Managed TikTok/IG/YouTube scrapers for authentic local clips (use opt-in per client; licensing risk).',
+  },
+  ytdlp: {
+    name: 'yt-dlp', kind: 'repo', category: 'B-roll sourcing',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'recommended', source: 'industry',
+    note: 'Self-hosted public-video fetch for social B-roll. Zero cost; legal/usage caveats apply.',
+  },
+
+  // ---- Assembly / Render --------------------------------------------------
+  ffmpeg: {
+    name: 'FFmpeg', kind: 'repo', category: 'Assembly / Render',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'recommended', source: 'industry',
+    note: 'Core deterministic encoder: cut, overlay, beat-sync, burned captions. Zero cost, full control.',
+  },
+  remotion: {
+    name: 'Remotion', kind: 'repo', category: 'Assembly / Render',
+    pricing: 'freemium', cost: 'Free for small teams · company license paid',
+    status: 'recommended', source: 'industry',
+    note: 'Programmatic React-driven video composition — reusable templated styles per client.',
+  },
+  shotstack: {
+    name: 'Shotstack', kind: 'api', category: 'Assembly / Render',
+    pricing: 'paid', cost: '~$0.20–0.50 / render min',
+    status: 'recommended', source: 'industry',
+    note: 'Hosted render API (no GPU infra to run). Fast path to scale assembly to 200+/mo.',
+  },
+  creatomate: {
+    name: 'Creatomate / json2video', kind: 'api', category: 'Assembly / Render',
+    pricing: 'paid', cost: 'From ~$41/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Template-based video API alternative to Shotstack; strong for caption/overlay automation.',
+  },
+
+  // ---- Transcription ------------------------------------------------------
+  whisper: {
+    name: 'Whisper / faster-whisper', kind: 'repo', category: 'Transcription',
+    pricing: 'free', cost: 'Free OSS (self-host GPU)',
+    status: 'recommended', source: 'industry',
+    note: 'Word-level transcription for caption timing + scene/beat analysis. No per-minute cost.',
+  },
+  deepgram: {
+    name: 'Deepgram / AssemblyAI', kind: 'api', category: 'Transcription',
+    pricing: 'freemium', cost: 'Free credits · ~$0.0043/min',
+    status: 'recommended', source: 'industry',
+    note: 'Hosted ASR if avoiding self-managed GPU; fast, accurate, diarization built-in.',
+  },
+
+  // ---- TTS / Voice --------------------------------------------------------
+  supertonic: {
+    name: 'Supertonic TTS', kind: 'repo', category: 'TTS / Voice',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'recommended', source: 'news',
+    note: 'High-fidelity open-source TTS for voiceover / beat-aligned narration. Zero cost.',
+  },
+  piper: {
+    name: 'Piper / Coqui TTS', kind: 'repo', category: 'TTS / Voice',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'recommended', source: 'industry',
+    note: 'Lightweight local TTS fallback — runs on CPU, good for bulk narration.',
+  },
+  elevenlabs: {
+    name: 'ElevenLabs', kind: 'api', category: 'TTS / Voice',
+    pricing: 'freemium', cost: 'Free 10k chars/mo · from $5/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Best-in-class natural TTS / voice cloning when premium voiceover quality is required.',
+  },
+
+  // ---- AI video gen -------------------------------------------------------
   heygen: {
-    name: 'HeyGen MCP',
-    kind: 'mcp',
-    status: 'configured',
-    note: 'AI avatar / video generation. Useful for intro/outro hooks and fallback talking-head segments.',
+    name: 'HeyGen MCP', kind: 'mcp', category: 'AI video gen',
+    pricing: 'freemium', cost: 'Free trial · from ~$29/mo',
+    status: 'configured', source: 'news',
+    note: 'AI avatar / video generation for intro-outro hooks and talking-head fallback.',
   },
   kie: {
-    name: 'Kie.ai',
-    kind: 'api',
-    status: 'recommended',
-    note: 'One API hub for video / image / music generation models — single key, single integration.',
+    name: 'Kie.ai', kind: 'api', category: 'AI video gen',
+    pricing: 'paid', cost: 'Usage-based per generation',
+    status: 'recommended', source: 'news',
+    note: 'One API hub for video / image / music gen models — single key, single integration.',
   },
   higgsfield: {
-    name: 'Higgsfield',
-    kind: 'api',
-    status: 'recommended',
-    note: 'Cinematic AI video with camera control and physics-aware motion for stylized B-roll inserts.',
+    name: 'Higgsfield', kind: 'api', category: 'AI video gen',
+    pricing: 'paid', cost: 'Subscription / credits',
+    status: 'recommended', source: 'news',
+    note: 'Cinematic AI video with camera control + physics-aware motion for stylized B-roll inserts.',
   },
   wangp: {
-    name: 'WanGP / Grafico AI',
-    kind: 'repo',
-    status: 'recommended',
-    note: 'Local GPU video/image generation (6GB+ VRAM) — zero per-clip API cost for generated B-roll.',
+    name: 'WanGP / Grafico AI', kind: 'repo', category: 'AI video gen',
+    pricing: 'free', cost: 'Free OSS (local GPU 6GB+)',
+    status: 'recommended', source: 'news',
+    note: 'Local GPU video/image generation — zero per-clip API cost for generated B-roll.',
   },
-  supertonic: {
-    name: 'Supertonic TTS',
-    kind: 'repo',
-    status: 'recommended',
-    note: 'High-fidelity open-source TTS for voiceover / beat-aligned narration timing.',
+  runwayPika: {
+    name: 'Runway / Pika', kind: 'api', category: 'AI video gen',
+    pricing: 'freemium', cost: 'Free credits · from ~$12–15/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Premium hosted gen-video alternatives when local quality is insufficient.',
   },
-  skillSeekers: {
-    name: 'Skill Seekers MCP',
-    kind: 'mcp',
-    status: 'configured',
-    note: 'Ingest inspiration videos/refs into a reusable "style profile" skill (pacing, cut rhythm, caption style).',
+
+  // ---- Music --------------------------------------------------------------
+  uppbeat: {
+    name: 'Uppbeat / FMA', kind: 'api', category: 'Music',
+    pricing: 'free', cost: 'Free (credit/CC license)',
+    status: 'recommended', source: 'industry',
+    note: 'Free, clearable background music for the beat-synced track.',
   },
+  epidemic: {
+    name: 'Epidemic Sound / Artlist', kind: 'api', category: 'Music',
+    pricing: 'paid', cost: 'From ~$10–15/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Licensed music with commercial + social clearance for client posting at scale.',
+  },
+
+  // ---- Posting / Anti-detect ---------------------------------------------
   playwright: {
-    name: 'Playwright MCP (Edge)',
-    kind: 'mcp',
-    status: 'configured',
-    note: 'Automated browser control for logged-in sessions, scraping, and posting flows.',
+    name: 'Playwright MCP (Edge)', kind: 'mcp', category: 'Posting / Anti-detect',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'configured', source: 'news',
+    note: 'Automated browser control for logged-in sessions, scraping, posting flows.',
   },
   browserMcp: {
-    name: 'BrowserMCP',
-    kind: 'mcp',
-    status: 'configured',
-    note: 'Drives an existing logged-in browser session — the bridge into MoreLogin anti-detect profiles.',
+    name: 'BrowserMCP', kind: 'mcp', category: 'Posting / Anti-detect',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'configured', source: 'news',
+    note: 'Drives an existing logged-in browser session — the bridge into MoreLogin profiles.',
   },
   browserAgent: {
-    name: 'Browser Agent',
-    kind: 'agent',
-    status: 'configured',
-    note: 'Edge browser-automation agent (BrowserMCP + Playwright) — submission flows with screenshot proof.',
+    name: 'Browser Agent', kind: 'agent', category: 'Posting / Anti-detect',
+    pricing: 'free', cost: 'Free (configured)',
+    status: 'configured', source: 'news',
+    note: 'Edge browser-automation agent (BrowserMCP + Playwright) — submission with screenshot proof.',
   },
+  moreloginApi: {
+    name: 'MoreLogin Local API', kind: 'api', category: 'Posting / Anti-detect',
+    pricing: 'freemium', cost: 'Free tier (limited profiles) · paid plans',
+    status: 'recommended', source: 'industry',
+    note: 'Programmatically start a client profile (US IP + residential proxy); returns CDP port to attach the driver. Already in their stack.',
+  },
+  antidetectAlt: {
+    name: 'GoLogin / AdsPower / Multilogin', kind: 'api', category: 'Posting / Anti-detect',
+    pricing: 'freemium', cost: 'Free tier · from ~$24–49/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Anti-detect browser alternatives to MoreLogin, all expose a local automation API — vendor risk hedge.',
+  },
+  officialApis: {
+    name: 'Official platform APIs', kind: 'api', category: 'Posting / Anti-detect',
+    pricing: 'free', cost: 'Free (quota-limited)',
+    status: 'recommended', source: 'industry',
+    note: 'YouTube Data API / Meta Graph / TikTok Content Posting API — robust where a client grants access; bypasses fragile UI for those.',
+  },
+  ayrshare: {
+    name: 'Ayrshare / Postiz', kind: 'api', category: 'Posting / Anti-detect',
+    pricing: 'freemium', cost: 'Postiz free OSS · Ayrshare from ~$29/mo',
+    status: 'recommended', source: 'industry',
+    note: 'Multi-platform social posting layer (Postiz is free self-host) — but does NOT preserve per-client US residential IP, so secondary to the MoreLogin path.',
+  },
+
+  // ---- Infra / Deploy -----------------------------------------------------
   supabase: {
-    name: 'Supabase MCP',
-    kind: 'mcp',
-    status: 'configured',
+    name: 'Supabase MCP', kind: 'mcp', category: 'Infra / Deploy',
+    pricing: 'freemium', cost: 'Free tier · Pro $25/mo',
+    status: 'configured', source: 'news',
     note: 'Job queue, render status, asset/library store, audit log.',
   },
   sheets: {
-    name: 'Google Sheets / Drive (n8n nodes)',
-    kind: 'api',
-    status: 'configured',
+    name: 'Google Sheets / Drive (n8n nodes)', kind: 'api', category: 'Infra / Deploy',
+    pricing: 'free', cost: 'Free (Workspace)',
+    status: 'configured', source: 'news',
     note: 'Brief intake (Doc), raw footage (Drive), ready-to-post trigger + status write-back (Sheet).',
   },
-  ffmpeg: {
-    name: 'FFmpeg + Shotstack/Remotion',
-    kind: 'api',
-    status: 'recommended',
-    note: 'Deterministic timeline assembly: cut talking head, overlay B-roll, beat-synced music, burned captions.',
-  },
-  whisper: {
-    name: 'Whisper + scene/beat analysis',
-    kind: 'repo',
-    status: 'recommended',
-    note: 'Transcribe talking head for caption timing; detect music beats + inspiration cut cadence.',
+  skillSeekers: {
+    name: 'Skill Seekers MCP', kind: 'mcp', category: 'Methodology',
+    pricing: 'free', cost: 'Free OSS',
+    status: 'configured', source: 'news',
+    note: 'Ingest inspiration videos/refs into a reusable "style profile" skill (pacing, cut rhythm, caption style).',
   },
   github: {
-    name: 'GitHub MCP',
-    kind: 'mcp',
-    status: 'configured',
-    note: 'Version control, CI for the automation + dashboard.',
+    name: 'GitHub MCP', kind: 'mcp', category: 'Infra / Deploy',
+    pricing: 'freemium', cost: 'Free · Team from $4/user',
+    status: 'configured', source: 'news',
+    note: 'Version control + CI for automation + dashboard.',
   },
   vercel: {
-    name: 'Vercel MCP',
-    kind: 'mcp',
-    status: 'configured',
-    note: 'Host this dashboard / review UI with preview URLs.',
+    name: 'Vercel MCP', kind: 'mcp', category: 'Infra / Deploy',
+    pricing: 'freemium', cost: 'Free Hobby · Pro $20/mo',
+    status: 'configured', source: 'news',
+    note: 'Host this dashboard / review UI with preview URLs + GitHub auto-deploy.',
   },
+
+  // ---- Methodology --------------------------------------------------------
   ecc: {
-    name: 'ECC Universal',
-    kind: 'skill',
-    status: 'configured',
+    name: 'ECC Universal', kind: 'skill', category: 'Methodology',
+    pricing: 'free', cost: 'Free (configured)',
+    status: 'configured', source: 'news',
     note: '182 methodology skills + 48 agents — pipeline design, review, hardening.',
   },
   superpowers: {
-    name: 'Superpowers',
-    kind: 'skill',
-    status: 'configured',
+    name: 'Superpowers', kind: 'skill', category: 'Methodology',
+    pricing: 'free', cost: 'Free OSS (configured)',
+    status: 'configured', source: 'news',
     note: 'Spec-driven dev, TDD, parallel subagents, systematic debugging for delivery.',
   },
   n8nSkills: {
-    name: 'n8n-workflow-patterns / n8n-mcp-tools-expert',
-    kind: 'skill',
-    status: 'configured',
+    name: 'n8n-workflow-patterns / mcp-tools-expert', kind: 'skill', category: 'Methodology',
+    pricing: 'free', cost: 'Free (configured)',
+    status: 'configured', source: 'news',
     note: 'Proven n8n architectural patterns + validated node configuration.',
-  },
-  moreloginApi: {
-    name: 'MoreLogin Local API',
-    kind: 'api',
-    status: 'recommended',
-    note: 'Start/stop a client profile programmatically; returns a debug port to attach the automation driver.',
   },
 }
 
@@ -140,10 +269,8 @@ export const proofAutomations = [
 export function tool(key: string): ToolRef {
   return (
     TOOLS[key] ?? {
-      name: key,
-      kind: 'repo',
-      status: 'recommended',
-      note: '',
+      name: key, kind: 'repo', category: 'Methodology',
+      pricing: 'free', cost: '', status: 'recommended', source: 'industry', note: '',
     }
   )
 }
