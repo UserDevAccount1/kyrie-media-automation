@@ -334,6 +334,18 @@ export const TOOLS: Record<string, ToolRef> = {
   },
 
   // ---- Methodology --------------------------------------------------------
+  claudeCode: {
+    name: 'Claude Code', kind: 'agent', category: 'Methodology',
+    pricing: 'freemium', cost: 'Subscription / API usage',
+    status: 'configured', source: 'industry',
+    note: 'AI coding agent used to scaffold, build and iterate the custom editing/posting agents and the per-format style templates. In the stack (AI Coding Tools). This is how the spec-driven agents get built fast.',
+  },
+  codex: {
+    name: 'Codex (GPT)', kind: 'agent', category: 'Methodology',
+    pricing: 'freemium', cost: 'Subscription / API usage',
+    status: 'configured', source: 'industry',
+    note: 'Secondary AI coding agent (cross-check / parallel implementation) for the template + orchestration code. In the stack alongside Claude Code.',
+  },
   ecc: {
     name: 'ECC Universal', kind: 'skill', category: 'Methodology',
     pricing: 'free', cost: 'Free (configured)',

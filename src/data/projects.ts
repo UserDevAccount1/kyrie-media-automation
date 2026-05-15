@@ -54,9 +54,10 @@ export const PROJECTS: Project[] = [
           'CAN replicate reliably: cut pace / clip duration rhythm, music energy and beat-synced cuts, caption style (font weight, position, pop-on timing), aspect ratio, hook structure, B-roll-to-talking-head ratio. Skill Seekers turns each inspiration video into a reusable structured "style profile".',
           'PARTIAL: exact color grade and transition flair — approximated with LUTs and a transition library, ~80% match.',
           'CANNOT fully replicate automatically: highly bespoke motion graphics, frame-perfect comedic timing, and creative narrative choices a senior editor would make. These are flagged for the optional human review step.',
+          'Template-driven guarantee: each client/format gets a predefined style template (aspect ratio, caption preset, hook structure, B-roll ratio, LUT, transition set). A custom AI agent — scaffolded and iterated with Claude Code / Codex — generates and orchestrates every edit to that exact spec, so output reliably conforms to the agreed format instead of improvising. New formats = a new template, not a rebuild.',
           'Expectation we set honestly: "same feel and pacing", not "pixel-identical to a hand-crafted edit".',
         ],
-        tools: ['skillSeekers', 'gemini', 'whisper', 'ecc'],
+        tools: ['skillSeekers', 'gemini', 'claudeCode', 'codex', 'langgraph', 'whisper', 'ecc'],
       },
       {
         n: 4,
